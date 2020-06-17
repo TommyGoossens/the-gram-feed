@@ -1,0 +1,12 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/s62-1-278920/the-gram-feed:$SHORT_SHA", "."]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/s62-1-278920/the-gram-feed:$SHORT_SHA"]
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      - run
+      - --filename=k8s-feed-config.yaml
+      - --image=gcr.io/s62-1-278920/the-gram-feed:$SHORT_SHA
+      - --location=europe-west1-b
+      - --cluster=the-gram-k8s
