@@ -173,3 +173,7 @@ Temporary Items
 # End of https://www.gitignore.io/api/rider,macos,jetbrains,dotnetcore
 
 .idea/
+
+TheGramFeed/bin/
+
+TheGramFeed/obj/
