@@ -1,15 +1,22 @@
 steps:
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/s62-1-278920/the-gram-feed:$SHORT_SHA", "."]
-  - name: "gcr.io/$PROJECT_ID/sonar-scanner:latest"
+  - name: gcr.io/$PROJECT_ID/sonar-scanner:latest
     args:
-      - -Dsonar.host.url=https://sonarcloud.io
-      - -Dsonar.login=${_SONAR_KEY_TOMMY}
-      - -Dsonar.projectKey=TommyGoossens_the-gram-feed
-      - -Dsonar.organization=tommygoossens
-      - -Dsonar.sources=.
-  tags: ['cloud-builders-community']
-      
+      - "-Dsonar.host.url=https://sonarcloud.io"
+      - "-Dsonar.login=${_SONAR_KEY_TOMMY}"
+      - "-Dsonar.projectKey=TommyGoossens_the-gram-feed"
+      - "-Dsonar.sources=."
+
+  # - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
+  #   args:
+  #   - '-Dsonar.host.url=https://sonarcloud.io'
+  #   - '-Dsonar.login=${_SONAR_KEY_TOMMY}'
+  #   - '-Dsonar.projectKey=TommyGoossens_the-gram-feed'
+  #   - '-Dsonar.organization=tommygoossens'
+  #   - '-Dsonar.sources=.'
+  # tags: ['cloud-builders-community']
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/s62-1-278920/the-gram-feed:$SHORT_SHA"]
   - name: "gcr.io/cloud-builders/gke-deploy"
