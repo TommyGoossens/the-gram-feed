@@ -7,8 +7,8 @@ steps:
       - "-Dsonar.login=${_SONAR_KEY_TOMMY}"
       - "-Dsonar.organization=tommygoossens"
       - "-Dsonar.projectKey=TommyGoossens_the-gram-feed"
-      - "-Dsonar.sources=."
-      - "-Dsonar.branch.name=master"
+      - "-Dsonar.projectBaseDir=TheGramFeed"
+      - "-Dsonar.branch.name=develop"
 
   # - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
   #   args:
