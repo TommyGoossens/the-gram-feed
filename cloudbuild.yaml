@@ -5,6 +5,7 @@ steps:
     args:
       - "-Dsonar.host.url=https://sonarcloud.io"
       - "-Dsonar.login=${_SONAR_KEY_TOMMY}"
+      - "-Dsonar.organization=tommygoossens"
       - "-Dsonar.projectKey=TommyGoossens_the-gram-feed"
       - "-Dsonar.sources=."
 
