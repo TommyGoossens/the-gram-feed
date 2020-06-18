@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: the-gram-feed
-          image: tommygoossens/the-gram-feed:latest
+          image: gcr.io/s62-1-278920/the-gram-feed:latest
           ports:
             - containerPort: 80
               name: http
