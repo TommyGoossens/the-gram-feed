@@ -22,5 +22,13 @@
       <Folder Include="Domain\Events" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="NLog.config">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+    </ItemGroup>
+
 
 </Project>

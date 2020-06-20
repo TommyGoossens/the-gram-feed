@@ -8,9 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TheGramFeed.EventBus;
+using TheGramFeed.EventBus.Connection;
 using TheGramFeed.Helpers;
 using TheGramFeed.Repository;
-using TheGramFeed.ServiceDiscovery;
 
 namespace TheGramFeed
 {
@@ -35,10 +35,10 @@ namespace TheGramFeed
             });
             //ConfigureConsul(services);
             services.AddScoped<IUserContextHelper, UserContextHelper>();
+            services.AddSingleton<RabbitMqPersistentConn>();
             services.AddHttpContextAccessor();
             
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddSingleton<RabbitMqPersistentConn>();
             services.AddControllers();
         }
 
@@ -59,12 +59,6 @@ namespace TheGramFeed
             app.UseRabbitListener();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
-        private void ConfigureConsul(IServiceCollection services)
-        {
-            var serviceConfig = Configuration.GetServiceConfig();
-
-            services.RegisterConsulServices(serviceConfig);
-        }
     }
     
     public static class ApplicationBuilderExtensions
@@ -82,7 +76,7 @@ namespace TheGramFeed
 
         private static void OnStarted()
         {
-            Listener.CreateConsumerChannel();
+            Listener.CreatePersistentChannels();
         }
 
         private static void OnStopping()
